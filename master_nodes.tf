@@ -31,6 +31,7 @@ resource "proxmox_vm_qemu" "k3s-master" {
   memory  = var.master_node_settings.memory
 
   agent = 1
+  onboot = var.onboot
 
   disk {
     type    = var.master_node_settings.storage_type
@@ -69,9 +70,10 @@ resource "proxmox_vm_qemu" "k3s-master" {
   nameserver = var.nameserver
 
   connection {
-    type = "ssh"
-    user = var.master_node_settings.user
-    host = local.master_node_ips[count.index]
+    type         = "ssh"
+    user         = var.master_node_settings.user
+    host         = local.master_node_ips[count.index]
+    private_key  = file(var.private_key)
   }
 
   provisioner "remote-exec" {
@@ -89,7 +91,6 @@ resource "proxmox_vm_qemu" "k3s-master" {
           user     = "k3s"
           password = random_password.k3s-master-db-password.result
         }]
-
         http_proxy  = var.http_proxy
       })
     ]
