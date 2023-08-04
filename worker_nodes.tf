@@ -43,6 +43,7 @@ resource "proxmox_vm_qemu" "k3s-worker" {
   memory  = each.value.memory
 
   agent = 1
+  onboot = var.onboot
 
   disk {
     type    = each.value.storage_type
@@ -84,6 +85,7 @@ resource "proxmox_vm_qemu" "k3s-worker" {
     type = "ssh"
     user = each.value.user
     host = each.value.ip
+    private_key = file(var.private_key)
   }
 
   provisioner "remote-exec" {
