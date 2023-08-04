@@ -66,6 +66,11 @@ variable "proxmox_resource_pool" {
   default     = ""
 }
 
+variable "scsihw" {
+  description = "Sets the SCSI HW controller"
+  type = string
+  default = "virtio-scsi-pci"
+
 variable "onboot"{
   type = bool
   description = "Whether to have the cluster startup after the PVE node starts."
