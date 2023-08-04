@@ -16,6 +16,7 @@ resource "proxmox_vm_qemu" "k3s-support" {
   clone = var.node_template
 
   pool = var.proxmox_resource_pool
+  scsihw = var.scsihw
 
   # cores = 2
   cores   = var.support_node_settings.cores
