@@ -12,7 +12,7 @@ locals {
         i  = i
         ip = cidrhost(pool.subnet, i)
         template = coalese(pool.template, var.node_template)
-      })
+      }))
     ]
   ])
 

@@ -70,6 +70,7 @@ variable "scsihw" {
   description = "Sets the SCSI HW controller"
   type = string
   default = "virtio-scsi-pci"
+}
 
 variable "onboot"{
   type = bool
